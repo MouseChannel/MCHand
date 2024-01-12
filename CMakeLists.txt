@@ -40,6 +40,6 @@ target_link_directories(src PUBLIC /home/mocheng/software/TensorRT-8.6.1.6/lib)
 target_include_directories(src PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 
-target_link_libraries(src ${OpenCV_LIBS} torch_cpu nvinfer nvonnxparser /home/mocheng/project/TensorRT/cmake-build-debug/libnvinfer_plugin.so cudart cublas)
+target_link_libraries(src PUBLIC ${OpenCV_LIBS} torch_cpu nvinfer nvonnxparser /home/mocheng/project/TensorRT/cmake-build-debug/libnvinfer_plugin.so cudart cublas)
 
 target_link_libraries(MCHand src)

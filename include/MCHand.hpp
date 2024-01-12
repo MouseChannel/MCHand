@@ -38,7 +38,7 @@ namespace mchand
         //     return input_output->Get_output(std::move(output_name));
         // }
 
-        template <typename T>
+        template <typename T = float>
         std::vector<T> Get_Output()
         {
             auto rawData = input_output->Get_output_data();

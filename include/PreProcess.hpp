@@ -8,6 +8,7 @@ namespace mchand
     public:
         static cv::Mat processInput_img(cv::Mat& origin_image);
         static int dst_width, dst_height;
+        static  cv::Mat Get_output_trans(  int width,int height );
 
     private:
         static void process_bbox(std::vector<float>& bbox);

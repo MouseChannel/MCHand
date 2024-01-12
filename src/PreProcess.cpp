@@ -15,6 +15,17 @@ namespace mchand
         return res;
     }
 
+    cv::Mat PreProcess::Get_output_trans( int  width,int height)
+    {
+        std::vector<float> bbox{0, 0,  width, height};
+        process_bbox(bbox);
+        auto bb_c_x = bbox[0] + 0.5f * bbox[2];
+        auto bb_c_y = bbox[1] + 0.5f * bbox[3];
+        auto res = gen_trans_from_patch_cv(bb_c_x, bb_c_y, bbox[2], bbox[3],  dst_width, dst_height, true);
+
+        return res;
+    }
+
     void PreProcess::process_bbox(std::vector<float>& bbox)
     {
         auto w = bbox[2] - 1;
