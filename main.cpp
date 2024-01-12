@@ -1,21 +1,20 @@
-#include "NvOnnxParser.h"
-#include "NvInfer.h"
-#include "NvInferPlugin.h"
+#include "MCHand.hpp"
 #include <iostream>
+#include "PreProcess.hpp"
 
-class mylogger : public nvinfer1::ILogger
+
+int main()
 {
-    void log(Severity severity, const char* msg) noexcept override
-    {
-        if (severity != Severity::kVERBOSE)
-        {
-            std::cout << std::to_string((int)severity) << "[TRT] " << std::string(msg) << std::endl;
-        }
-        // else
-        // {
-        //     std::cout << "verbose:" << "[TRT] " << std::string(msg) << std::endl;
-        // }
-    }
-};
+    using namespace mchand;
+    auto origin_image1 = cv::imread("/home/mocheng/project/MCHand/me.jpg",
+                                    cv::IMREAD_IGNORE_ORIENTATION | cv::IMREAD_COLOR);
+    auto input_mat = PreProcess::processInput_img(origin_image1);
 
-
+    MCHand m;
+    m.Init("/home/mocheng/project/RECONSTRCUT/InterWild/demo/mochengres.onnx");
+    m.Set_input_name("input");
+    m.Set_output_name("joint_img");
+    m.Infer(input_mat);
+    auto d = m.Get_Output<float>();
+    return 0;
+}

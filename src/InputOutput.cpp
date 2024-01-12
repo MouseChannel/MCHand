@@ -21,13 +21,19 @@ namespace mchand
         create_host_device_buffer(engine);
     }
 
-    void InputOutput::Set_input(torch::Tensor &input_data, std::string input_name)
+    void InputOutput::Set_input_name(std::string input_name)
     {
-        auto input_index = mEngine->getBindingIndex(input_name.c_str());
+        input_index = mEngine->getBindingIndex(input_name.c_str());
+        assert(input_index>=0);
+    }
+
+    void InputOutput::Set_input_data(torch::Tensor& input_data)
+    {
+        assert(input_data.dtype() == torch::kFloat32);
         memcpy(hostBuffer[input_index], input_data.data_ptr<float>(), input_data.numel() * sizeof(float));
     }
 
-    void InputOutput::Set_input(cv::Mat& input_img, std::string input_name)
+    void InputOutput::Set_input_data(cv::Mat& input_img)
     {
         int height = input_img.rows;
         int width = input_img.cols;
@@ -37,7 +43,13 @@ namespace mchand
         tensor_image = tensor_image.permute({2, 0, 1});
         tensor_image = tensor_image.contiguous();
         tensor_image = tensor_image.unsqueeze(0);
-        Set_input(tensor_image, std::move(input_name));
+        Set_input_data(tensor_image);
+    }
+
+    void InputOutput::Set_output_name(std::string output_name)
+    {
+        output_index = mEngine->getBindingIndex(output_name.c_str());
+        assert(output_index>=0);
     }
 
     void InputOutput::CopyBufferHost2Device()

@@ -63,11 +63,10 @@ namespace mchand
         }
 
         auto input_and_output_size = mEngine->getNbIOTensors();
-        
     }
 
-    bool Engine::infer() const
+    bool Engine::infer(const std::shared_ptr<InputOutput>& input_output) const
     {
-        return mContext->executeV2(deviceBuffer.data());
+        return mContext->executeV2(input_output->get_deviceBuffer().data());
     }
 }

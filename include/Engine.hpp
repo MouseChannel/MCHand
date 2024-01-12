@@ -1,3 +1,6 @@
+#pragma once
+#include <InputOutput.hpp>
+
 #include "NvInfer.h"
 #include "iostream"
 #include <memory>
@@ -24,10 +27,10 @@ namespace mchand
     {
     public:
         Engine(const std::string onnx_path);
-        ~Engine();
-        [[nodiscard]] bool infer() const;
+        ~Engine() = default;
+        [[nodiscard]] bool infer(const std::shared_ptr<InputOutput>& input_output) const;
 
-        [[nodiscard]] auto get_engine()
+        [[nodiscard]] auto get_handle()
         {
             return mEngine;
         }
@@ -38,8 +41,8 @@ namespace mchand
         std::shared_ptr<nvinfer1::ICudaEngine> mEngine;
         std::shared_ptr<nvinfer1::IExecutionContext> mContext;
 
-        std::vector<void*> hostBuffer;
-        std::vector<void*> deviceBuffer;
-        std::vector<size_t> buffer_size;
+        // std::vector<void*> hostBuffer;
+        // std::vector<void*> deviceBuffer;
+        // std::vector<size_t> buffer_size;
     };
 }

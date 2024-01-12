@@ -15,7 +15,7 @@ namespace mchand
         return res;
     }
 
-    void process_bbox(std::vector<float>& bbox)
+    void PreProcess::process_bbox(std::vector<float>& bbox)
     {
         auto w = bbox[2] - 1;
         auto h = bbox[3] - 1;
@@ -34,7 +34,9 @@ namespace mchand
         bbox[3] = int(h * 1.25f);
         bbox[0] = int(c_x - bbox[2] / 2);
         bbox[1] = int(c_y - bbox[3] / 2);
-    };
+    }
+
+ 
 
     cv::Mat PreProcess::generate_patch_image(cv::Mat& origin_img, std::vector<float> bbox)
     {
