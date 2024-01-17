@@ -3,19 +3,41 @@
 #include <PostPrecess.hpp>
 
 #include "PreProcess.hpp"
+#include "MANO.hpp"
 
+// std::vector<std::string> split(const std::string& s, char delimiter, bool recursive = false)
+// {
+//     std::vector<std::string> tokens;
+//     std::istringstream tokenStream(s);
+//     std::string token;
+//
+//     while (std::getline(tokenStream, token, delimiter))
+//     {
+//         if (recursive)
+//         {
+//             auto rr = split(token, ' ');
+//             int r = 0;
+//         }
+//         tokens.push_back(token);
+//     }
+//
+//     return tokens;
+// }
 
 int main()
 {
     using namespace mchand;
-    // auto origin_image1 = cv::imread("/home/mocheng/project/MCHand/me.jpg",
-    //                                 cv::IMREAD_IGNORE_ORIENTATION | cv::IMREAD_COLOR);
-    // auto input_mat = PreProcess::processInput_img(origin_image1);
+   
 
+
+    MANO::Init();
     MCHand m;
     m.Init("/home/mocheng/project/RECONSTRCUT/InterWild/demo/mochengres.onnx");
     m.Set_input_name("input");
-    m.Set_output_name("joint_img");
+    m.Set_output_name("rjoint_img");
+    m.Set_output_name("ljoint_img");
+    m.Set_output_name("rmano_mesh");
+    m.Set_output_name("lmano_mesh");
 
     cv::VideoCapture cap(0);
 
@@ -38,22 +60,58 @@ int main()
             std::cerr << "Error: Could not read frame from the camera." << std::endl;
             break;
         }
-        cv::Mat destImage = cv::Mat::zeros(frame.size(), frame.type());
 
         // 复制图像数据
+
+        // auto input_mat = PreProcess::processInput_img(frame);
+
+
+        auto test_img = cv::imread("/home/mocheng/project/MCHand/me.jpg",
+                                   cv::IMREAD_COLOR | cv::IMREAD_IGNORE_ORIENTATION);
+        frame = test_img;
+
+        cv::Mat destImage = cv::Mat::zeros(frame.size(), frame.type());
         frame.copyTo(destImage);
-        auto input_mat = PreProcess::processInput_img(frame);
-        m.Infer(input_mat);
-        auto d = m.Get_Output();
-        PostProcess::vis_joint(d,destImage);
+         
+
+        std::vector<float> test_arr;
+        if (frame.isContinuous())
+        {
+            test_arr.assign(frame.data, frame.data + frame.total() * frame.channels());
+        }
+        else
+        {
+            for (int i = 0; i < frame.rows; ++i)
+            {
+                test_arr.insert(test_arr.end(), frame.ptr<uchar>(i),
+                                frame.ptr<uchar>(i) + frame.cols * frame.channels());
+            }
+        }
+      
+
+    
+        m.Infer(test_arr, frame.rows, frame.cols);
+
+       
+        auto imgr = m.Get_Output("rjoint_img");
+        auto imgl = m.Get_Output("ljoint_img");
+
+        auto meshr = m.Get_Output("rmano_mesh");
+
+        auto meshl = m.Get_Output("lmano_mesh");
+
+        // PostProcess::save_obj(meshr, false);
+        // PostProcess::vis_joint(imgr, destImage);
+        PostProcess::vis_joint(imgr, destImage);
+        // cv::imwrite("testarr.jpg", destImage1);
+        // PostProcess::vis_joint(imgr, destImage);
         cv::imshow("Camera", destImage);
 
-        // 按下 ESC 键退出循环
+
         if (cv::waitKey(1) == 27)
         {
             break;
         }
-        
     }
 
     return 0;

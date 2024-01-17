@@ -5,6 +5,7 @@
 #include "torch/script.h"
 #include <memory>
 #include <numeric>
+#include <PreProcess.hpp>
 #include <stdexcept>
 #include <utility>
 
@@ -27,6 +28,12 @@ namespace mchand
         assert(input_index>=0);
     }
 
+    // void InputOutput::Set_input_data(std::vector<float> raw_img)
+    // {
+    //     auto dst_img = cv::Mat(raw_img.size(), 1,CV_32F, raw_img.data());
+    //     PreProcess::processInput_img(dst_img)
+    // }
+
     void InputOutput::Set_input_data(torch::Tensor& input_data)
     {
         assert(input_data.dtype() == torch::kFloat32);
@@ -48,8 +55,10 @@ namespace mchand
 
     void InputOutput::Set_output_name(std::string output_name)
     {
-        output_index = mEngine->getBindingIndex(output_name.c_str());
-        assert(output_index>=0);
+        outputs[output_name] = mEngine->getBindingIndex(output_name.c_str());
+        // output_index = mEngine->getBindingIndex(output_name.c_str());
+        // assert(output_index>=0);
+        int au = 0;
     }
 
     void InputOutput::CopyBufferHost2Device()

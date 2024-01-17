@@ -2,6 +2,7 @@
 
 #include <Engine.hpp>
 #include <InputOutput.hpp>
+#include "PreProcess.hpp"
 
 namespace mchand
 {
@@ -24,6 +25,14 @@ namespace mchand
     void MCHand::Set_output_name(std::string output_name)
     {
         input_output->Set_output_name(std::move(output_name));
+    }
+
+    void MCHand::Infer(std::vector<float>& raw_data, int height, int width)
+    {
+        auto dst_img = cv::Mat(height, width,CV_32FC3, raw_data.data());
+        auto fixed_img = PreProcess::processInput_img(dst_img);
+       
+        Infer(fixed_img);
     }
 
     // void MCHand::Infer(torch::Tensor& input_image)
