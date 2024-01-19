@@ -21,6 +21,7 @@ namespace mchand
         void Set_output_name(std::string output_name);
 
         void Infer(std::vector<float>& raw_data, int height, int width);
+        void Infer(float* raw_data, int height, int width);
 
         template <typename T>
         void Infer(T& input_data)

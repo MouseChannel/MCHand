@@ -14,7 +14,7 @@ message(STATUS ${SRC})
 
 # set(IMGUIDIR ${PROJECT_SOURCE_DIR}/lib/imgui)
 
-add_library(src ${SRC})
+add_library(src SHARED ${SRC})
 target_include_directories(src PUBLIC /home/mocheng/project/TensorRT/include /home/mocheng/project/TensorRT/parsers/onnx)
 
 

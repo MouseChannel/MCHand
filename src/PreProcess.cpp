@@ -26,6 +26,12 @@ namespace mchand
         return res;
     }
 
+    // cv::Mat PreProcess::process_unity_img(Color32** rawImage, int width, int height)
+    // {
+    //     cv::Mat image(height, width, CV_8UC4, *rawImage);
+    //     
+    // }
+
     void PreProcess::process_bbox(std::vector<float>& bbox)
     {
         auto w = bbox[2] - 1;

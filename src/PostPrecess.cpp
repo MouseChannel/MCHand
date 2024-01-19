@@ -35,6 +35,9 @@ void mchand::PostProcess::vis_joint(std::vector<float> joint_point, cv::Mat& out
         cv::circle(output_img, {(int)p11, (int)p12}, 3, color, -1, cv::LINE_AA);
         cv::circle(output_img, {(int)p21, (int)p22}, 3, color, -1, cv::LINE_AA);
     }
+    // cv::cvtColor(output_img,output_img,cv::COLOR_CWH2RGB);
+    // output_img.se
+    
 }
 
 void mchand::PostProcess::save_obj(std::vector<float> mano_mesh, bool is_left)
