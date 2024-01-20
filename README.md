@@ -56,7 +56,10 @@ have test in **Unity 22.3LTS, Ubuntu23.10**
 
 - real-time hand-joint-inference
 - real-time animated hand-mesh
+<div align=center>
+    <img src="showcase/handUnityCase.gif" width="70%">
 
+ </div>
 <div align=center>
     <img src="showcase/unityshowcase1.png" width="45%">
 <img src="showcase/unityshowcase2.png" width="45%">
