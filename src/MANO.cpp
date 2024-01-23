@@ -2,8 +2,8 @@
 
 #include <sstream>
 #include <string>
-#include "left_faces.h"
-#include "right_faces.h"
+#include "left_faces.hpp"
+#include "right_faces.hpp"
 
 namespace mchand
 {

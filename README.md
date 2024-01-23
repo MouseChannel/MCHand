@@ -50,7 +50,7 @@ Real-time hand recognition,is able to generate **Hand Joints Image** and generat
 real-time Hand Joints
  </div>
 
-### 🫱 Unity Plugin
+### 🤗 Unity Plugin
 
 have test in **Unity 22.3LTS, Ubuntu23.10**
 
@@ -67,7 +67,7 @@ have test in **Unity 22.3LTS, Ubuntu23.10**
 real-time Hand  
  </div>
 
-### 🫱 Unreal Plugin
+### 🤗 Unreal Plugin
 have test in **Unreal Engine5.3, Ubuntu23.10**
 - real-time hand-joint-inference
 - real-time animated hand-mesh
