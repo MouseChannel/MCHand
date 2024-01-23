@@ -1,8 +1,8 @@
-# Real-time recognition of hand gestures
+# 👍Real-time recognition of hand gestures👍
 
 A real-time hand gesture recognition
 
-Inference acceleration by Nvidia Tensorrt , the inference time dropped from 880ms to 7ms
+Inference acceleration by Nvidia Tensorrt , the inference time dropped from **884ms** to **9.3ms**
 
 # 🔨Setup
 
