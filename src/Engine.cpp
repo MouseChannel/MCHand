@@ -21,7 +21,7 @@ namespace mchand
         {
             throw std::runtime_error("err config");
         }
-        config->setFlag(nvinfer1::BuilderFlag::kFP16);
+        // config->setFlag(nvinfer1::BuilderFlag::kFP16);
         auto parser = nvonnxparser::createParser(*network, mlog);
         if (!parser)
         {
