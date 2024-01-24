@@ -4,3 +4,8 @@ build
 Obj
 obj
 Logs
+Binaries
+Intermediate
+Saved
+.vscode
+UEHandDemo.code-workspace

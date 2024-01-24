@@ -1,0 +1,8 @@
+[submodule "MCInterWild"]
+	path = MCInterWild
+	url = https://github.com/MouseChannel/InterWild.git
+	branch = mousechannel
+[submodule "MCTensorRT"]
+	path = MCTensorRT
+	url = https://github.com/MouseChannel/TensorRT.git
+	branch = mousechannel
