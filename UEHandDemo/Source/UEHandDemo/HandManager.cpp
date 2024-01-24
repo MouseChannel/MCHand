@@ -29,10 +29,7 @@ void AHandManager::BeginPlay()
 	FString aa = Message;
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *aa);
 
-	// myca->TTest();
-	// // myca->Update(vis_joint);
-	//  
-	// return;
+	 
 
 	Super::BeginPlay();
 	void* LibraryHandle = FPlatformProcess::GetDllHandle(
@@ -105,7 +102,7 @@ void AHandManager::BeginPlay()
 	rvertices.SetNum(778);
 
 
-	// UE_LOG(LogTemp, Warning, TEXT("%d,%d,%d,%d"), IntArrayView[0], IntArrayView[1], IntArrayView[2], IntArrayView[4]);
+	 
 }
 
 
@@ -124,11 +121,9 @@ void AHandManager::Tick(float DeltaTime)
 	MCHand_GetLeftJoint();
 	MCHand_GetRightJoint();
 	UE_LOG(LogTemp, Warning, TEXT("%d %d "), frame_w, frame_h  );
-	// UE_LOG(LogTemp, Warning, TEXT("%f %f %f"), left_jpiont[0], left_jpiont[1], left_jpiont[2] );
-
+	 
 	auto vis = MCHand_vis_joint();
-	// UE_LOG(LogTemp, Warning, TEXT("Manager Tick"));
-
+ 
 
 	FMemory::Memcpy(vis_joint.GetData(), vis, vis_joint.Num() * sizeof(float));
 
@@ -141,6 +136,5 @@ void AHandManager::Tick(float DeltaTime)
 		rvertices[i] = FVector3d{right_mesh_raw[i * 3], right_mesh_raw[i * 3 + 1], right_mesh_raw[i * 3 + 2]};
 	}
 
-
-	// myca->Update(vis_joint);
+ 
 }

@@ -12,13 +12,7 @@ void UMyCamrta::NativeConstruct()
 
 	ImageWidget = Cast<UImage>(GetWidgetFromName(TEXT("myImage"))); // 替换为你的UImage控件的名称
 
-	// if (ImageWidget != nullptr)
-	// {
-	// 	TemporaryTexture = UTexture2D::CreateTransient(640, 480, PF_R8G8B8A8);
-	// }
-
-
-	// Pixels.SetNum(640 * 480*4);
+ 
 }
 
 void UMyCamrta::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)

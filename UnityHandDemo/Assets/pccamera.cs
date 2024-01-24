@@ -5,27 +5,21 @@ using UnityEngine.UI;
 
 public class pccamera : MonoBehaviour
 {
-    public RawImage rawImage; //相机渲染的UI
-
-    // public Image displayImage;
-    // public GameObject quad; //相机渲染的GameObject
+    public RawImage rawImage;  
+ 
     private WebCamTexture webCamTexture;
 
     void Start()
     {
         webCamTexture = new WebCamTexture();
-        // displayImage.sprite.texture = webCamTexture;
+        
         rawImage.texture = webCamTexture;
        
         webCamTexture.Play();
-        // webCamTexture.
-        // rawImage.texture.GetNativeTexturePtr();
-        // ToOpenCamera();
+   
     }
 
-    /// <summary>
-    /// 打开摄像机
-    /// </summary>
+ 
     public void ToOpenCamera()
     {
         StartCoroutine("OpenCamera");
@@ -39,7 +33,7 @@ public class pccamera : MonoBehaviour
             maxl = Screen.height;
         }
 
-        // 申请摄像头权限
+   
         yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
         if (Application.HasUserAuthorization(UserAuthorization.WebCam))
         {
@@ -47,20 +41,13 @@ public class pccamera : MonoBehaviour
             {
                 webCamTexture.Stop();
             }
-
-            //打开渲染图
+ 
             if (rawImage != null)
             {
                 rawImage.gameObject.SetActive(true);
             }
 
-            // if (quad != null)
-            // {
-            //     quad.gameObject.SetActive(true);
-            // }
-
-            // 监控第一次授权，是否获得到设备（因为很可能第一次授权了，但是获得不到设备，这里这样避免）
-            // 多次 都没有获得设备，可能就是真没有摄像头，结束获取 camera
+            
             int i = 0;
             while (WebCamTexture.devices.Length <= 0 && i < 300)
             {
@@ -76,36 +63,28 @@ public class pccamera : MonoBehaviour
             else
             {
                 string devicename = devices[0].name;
-                // webCamTexture = new WebCamTexture(devicename, 1920,
-                //     1080, 30)
-                // {
-                //     wrapMode = TextureWrapMode.Repeat
-                // };
+                
                 webCamTexture = new WebCamTexture();
 
-                // 渲染到 UI 或者 游戏物体上
+                
                 if (rawImage != null)
                 {
                     rawImage.texture = webCamTexture;
                 }
 
-                // var r = rawImage.texture.
-                // if (quad != null)
-                // {
-                //     quad.GetComponent<Renderer>().material.mainTexture = webCamTexture;
-                // }
+               
                 webCamTexture.Play();
             }
         }
         else
         {
-            Debug.LogError("未获得读取摄像头权限");
+            Debug.LogError("error");
         }
     }
 
     private void OnApplicationPause(bool pause)
     {
-        // 应用暂停的时候暂停camera，继续的时候继续使用
+   
         if (webCamTexture != null)
         {
             if (pause)

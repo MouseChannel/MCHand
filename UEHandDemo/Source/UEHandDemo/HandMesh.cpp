@@ -82,15 +82,13 @@ void AHandMesh::Tick(float DeltaSeconds)
 	else
 	{
 		UE::Geometry::FDynamicMesh3 Mesh;
-		// TArray<FVector3d> Vertices;
-		// Vertices.SetNum(verts_data.Num());
+		 
 		for (int i = 0; i < verts_data.Num(); i++)
 		{
 			Mesh.AppendVertex(verts_data[i] * 1000);
 		}
 		auto rr = Mesh.GetVertex(0);;
-		// UE_LOG(LogTemp, Warning, TEXT("HERE Tick%lf %f %f "),  verts_data[0][0], (float) rr[1], (float) rr[2]);
-		// UE_LOG(LogTemp, Warning, TEXT("HERE Tick%d   "), verts_data.Num());
+		 
 		auto& faces = is_left ? AHandManager::lface : AHandManager::rface;
 		for (int i = 0; i < faces.Num() / 3; i++)
 		{
@@ -101,57 +99,5 @@ void AHandMesh::Tick(float DeltaSeconds)
 		has_Init = true;
 	}
 
-	// UE::Geometry::TDynamicVector<>
-
-	// UE::Geometry::FDynamicMesh3 temp;
-	// Super::Tick(DeltaSeconds);
-	// UE::Geometry::FDynamicMesh3 Mesh;
-	//
-	//  
-	// // Mesh.GetVerticesBuffer()[0] = FVector3d{0, 0, 0};
-	// TArray<FVector3f> Vertices;
-	// Vertices.Emplace(0, 0, 0); // V0
-	// Vertices.Emplace(1, 0, 0); // V1
-	// Vertices.Emplace(1, 1, 0); // V2
-	// Vertices.Emplace(0, 1, 0); // V3
-	// Vertices.Emplace(0, 0, 1); // V4
-	// Vertices.Emplace(1, 0, 1); // V5
-	// Vertices.Emplace(1, 1, 1); // V6
-	// Vertices.Emplace(0, 1, 1); // V7
-	//
-	// // 添加立方体的三角形面
-	// temp.AppendTriangle(0, 1, 2);
-	// temp.AppendTriangle(0, 2, 3);
-	// temp.AppendTriangle(4, 5, 6);
-	// temp.AppendTriangle(4, 6, 7);
-	// temp.AppendTriangle(0, 1, 5);
-	// temp.AppendTriangle(0, 5, 4);
-	// temp.AppendTriangle(2, 3, 7);
-	// temp.AppendTriangle(2, 7, 6);
-	// temp.AppendTriangle(0, 3, 7);
-	// temp.AppendTriangle(0, 7, 4);
-	// temp.AppendTriangle(1, 2, 6);
-	// temp.AppendTriangle(1, 6, 5);
-	// FDynamicMeshBuilder builder(ERHIFeatureLevel::Type::SM5);
-	// TArray<FDynamicMeshVertex> verts;
-	// for (int i = 0; i < Vertices.Num(); i++)
-	// {
-	// 	verts.Add(FDynamicMeshVertex{Vertices[i]});
-	// }
-	// builder.AddVertices(verts);
-	// TArray<uint32> indices;
-	// for (int i = 0; i < 12; i++)
-	// {
-	// 	indices.Add(temp.GetTriangle(i).A);
-	// 	indices.Add(temp.GetTriangle(i).B);
-	// 	indices.Add(temp.GetTriangle(i).C);
-	// }
-	// builder.AddTriangles(indices);
-	// builder.GetMesh()
-
-	// builder.Draw()
-	// UE::Geometry::FDynamicMesh3 Mesh(builder);
-	// builder.Draw()
-
-	// Mesh.
+	 
 }
